@@ -854,16 +854,14 @@ The abstract goes here.
 % 
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
-\IEEEPARstart{T}{he} goal of our project is to use accelerometer and gyroscope data gathered by an app on an android smartphone to differentiate persons and the way persons carry the smartphone( left/right trouser pocket, left/right jacket pocket) as it has been done before [7],
-as well as differentiating between different movement types (idle, walk, run, uphill, downhill) which has also been worked on by [8].We will also look into distinguishing different prorperties of the ground the Person is walking on where there is no publications to be found on.
+\IEEEPARstart{T}{he} goal of our project is to gather various information from the gait of a person using the accelerometer and gyroscope of a normal Smartphone. Foremost the aim is to identify persons by their gait as well as their way of carrying the phone. The different ways of carrying the phone will be classified by the piece of clothing the phone is stored in like different trousers pockets and jacket pocket as it has been done before in various papers like [7]. Also we want to differentiate the mode of their gait to get information about wether a person is standing still, walking or running, as well as on a flat surface, uphil or downhill. There are papers like [8] already using not only flat surfaces but more interesting and usual settings like ways including stairs and corners in hallways. Therefore a focus of this project will be to gather information about the quality of the underground the person is walking on, deciding if it is hard ground (beton/asphalt) or soft ground (grass/dirt/mulch).
 
 To gather the necessary data we will use an app on a samsung S3 smartphone programmed in Python using Kivy http://kivy.org/\#home. The rate of measurement is about 40 measurements per Second. 
 The accelerometer used in the Samsung S3 is the LSM330DLC.
 The data will consist of a list of timestamps and the according values for the accelerometer and gyroscope values in three dimensions.
 Since the smartphone can not provide a realtime environment for measurements the measured values will be slightly irregular.
 
-Similiar projects have already been preformed, such as using an wii-remote or custom-made accelerometer and gyroscopes with high measurement rates to differentiate between different person gaits with fixed locations of the sensor on the body (mostly legs). Also there is a paper[7] which does not only use hip/leg but can also differentiate the gait in chest-pockets or in hand (on the handle of a suitcase). While most papers use data gathered on flat floors [8] already used a more typical route.
-Our aim is to gather the data from 1-3 walks over different routes rather than use a predefined setting. And also there seems to be no work on classifications of underground types (asphalt vs. grass) which will be one of our main foci.
+
 
 
 % You must have at least 2 lines in the paragraph with the drop letter
@@ -940,5 +938,3 @@ The authors would like to thank...
 
 % that's all folks
 \end{document}
-
-
