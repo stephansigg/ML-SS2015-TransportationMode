@@ -1,9 +1,9 @@
 Yes the enumeration starts with 3 as I started to enumerate them based on the line-number in our pad
 
-[3]http://www.cs.uic.edu/~boxu/mp2p/p54-stenneth.pdf
-[4]http://cs-www.cs.yale.edu/homes/mfn3/pub/mfn_gait_id.pdf
-[5]http://www.researchgate.net/publication/4258023_Gait_Authentication_and_Identification_Using_Wearable_Accelerometer_Sensor
-[6]http://academypublisher.com/jcp/vol01/no07/jcp01075159.pdf
-[7]http://www.researchgate.net/publication/221015898_Unobtrusive_Multimodal_Biometrics_for_Ensuring_Privacy_and_Information_Security_with_Personal_Devices
+[3]http://www.cs.uic.edu/~boxu/mp2p/p54-stenneth.pdf transmode
+[4]http://cs-www.cs.yale.edu/homes/mfn3/pub/mfn_gait_id.pdf gait
+[5]http://www.researchgate.net/publication/4258023_Gait_Authentication_and_Identification_Using_Wearable_Accelerometer_Sensor gaitauth1
+[6]http://academypublisher.com/jcp/vol01/no07/jcp01075159.pdf gaitauth2
+[7]http://www.researchgate.net/publication/221015898_Unobtrusive_Multimodal_Biometrics_for_Ensuring_Privacy_and_Information_Security_with_Personal_Devices 
 [8]https://www.fbi.h-da.de/fileadmin/gruppen/FG-IT-Sicherheit/Publikationen/2011/2011_10_Nickel_ICCST.pdf
 [9]http://www.google.de/url?sa=t&rct=j&q=&esrc=s&source=web&cd=6&ved=0CEMQFjAF&url=http%3A%2F%2Fwww.researchgate.net%2Fprofile%2FRaymond_Kai-Yu_Tong%2Fpublication%2F6319621_The_reliability_of_using_accelerometer_and_gyroscope_for_gait_event_identification_on_persons_with_dropped_foot%2Flinks%2F00b7d51f8f2d07cb06000000.pdf&ei=IsRHVa71DoONsgHfyIGgCw&usg=AFQjCNEoBruuX6GThKGczXhdKixQgIVkig&sig2=p9VaCTPuJLnCYoJHsgzFcg&bvm=bv.92291466,d.bGg&cad=rja
