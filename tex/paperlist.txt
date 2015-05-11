@@ -8,3 +8,4 @@ Yes the enumeration starts with 3 as I started to enumerate them based on the li
 [8]https://www.fbi.h-da.de/fileadmin/gruppen/FG-IT-Sicherheit/Publikationen/2011/2011_10_Nickel_ICCST.pdf
 [9]http://www.google.de/url?sa=t&rct=j&q=&esrc=s&source=web&cd=6&ved=0CEMQFjAF&url=http%3A%2F%2Fwww.researchgate.net%2Fprofile%2FRaymond_Kai-Yu_Tong%2Fpublication%2F6319621_The_reliability_of_using_accelerometer_and_gyroscope_for_gait_event_identification_on_persons_with_dropped_foot%2Flinks%2F00b7d51f8f2d07cb06000000.pdf&ei=IsRHVa71DoONsgHfyIGgCw&usg=AFQjCNEoBruuX6GThKGczXhdKixQgIVkig&sig2=p9VaCTPuJLnCYoJHsgzFcg&bvm=bv.92291466,d.bGg&cad=rja
 [10]http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=4373794
+[11]http://www.ntu.edu.sg/home/dongxu/TIP-Gait.pdf video
