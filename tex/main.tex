@@ -937,4 +937,9 @@ The authors would like to thank...
 
 
 % that's all folks
+\section{Related Work}
+There has been a lot of work on human gait recognition. There are two main approaches to identify a person or a persons gender via human gait recognition: First there is the "outer" approach where fixed sensors (mostly cameras) are used to gather the necessary information to compute the gait and thereby identify a person \ref{video}. These were called vision-based by Gafurov \ref{gaitauth2} Secondly there is the "inner" approach called sensor-based by Gafurov where sensors (mostly accelerometers and gyroscopes) are carried by the person which is to be identified.\\
+As we plan to identify persons using a smartphone app our approach would be a "sensor-based" gait recognition. There has been done work using more of the typical sensors of a modern day smartphone like GPS to differentiate between different modes of transport like walking or driving with a car \ref{transmode}.\\
+While there seems to be little to no work on groundtype recognition via gait differences there has been studies analysing the impact a backpack weighting 4kg does on the ability of a classifier trained on persons not carrying such \ref{gaitauth}. That particular paper \ref{gaitauth} also uses sensors placed in the persons pocket.
+Another paper by Gafurov \ref{gaitauth2} uses accelerometer data to identify a person by their gait but this time via an sensor strapped on the leg near the ankle. The use of a gyroscope is claimed to be first used in \ref{gait} using a wii-remote controll featuring similiar measurement frequencies of 50Hz like  while the other papers had frequencies well over 100Hz. Also \ref{gait} does generate data not only walking a straight hallway but walking with distorted speed or walking in different directions with stops inbetween, while \ref{gaitauth}\ref{gaitauth2} left out data right after the start of a walk defining it as "not characteristic".
 \end{document}
