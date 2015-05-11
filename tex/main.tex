@@ -678,6 +678,11 @@ pdfkeywords={Computer Society, IEEEtran, journal, LaTeX, paper,
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 
+\usepackage[
+    backend=biber,
+    natbib=true
+]{biblatex}
+\addbibresource{biblio.bib}
 
 \begin{document}
 %
@@ -938,8 +943,14 @@ The authors would like to thank...
 
 % that's all folks
 \section{Related Work}
-There has been a lot of work on human gait recognition. There are two main approaches to identify a person or a persons gender via human gait recognition: First there is the "outer" approach where fixed sensors (mostly cameras) are used to gather the necessary information to compute the gait and thereby identify a person \ref{video}. These were called vision-based by Gafurov \ref{gaitauth2} Secondly there is the "inner" approach called sensor-based by Gafurov where sensors (mostly accelerometers and gyroscopes) are carried by the person which is to be identified.\\
-As we plan to identify persons using a smartphone app our approach would be a "sensor-based" gait recognition. There has been done work using more of the typical sensors of a modern day smartphone like GPS to differentiate between different modes of transport like walking or driving with a car \ref{transmode}.\\
-While there seems to be little to no work on groundtype recognition via gait differences there has been studies analysing the impact a backpack weighting 4kg does on the ability of a classifier trained on persons not carrying such \ref{gaitauth}. That particular paper \ref{gaitauth} also uses sensors placed in the persons pocket.
-Another paper by Gafurov \ref{gaitauth2} uses accelerometer data to identify a person by their gait but this time via an sensor strapped on the leg near the ankle. The use of a gyroscope is claimed to be first used in \ref{gait} using a wii-remote controll featuring similiar measurement frequencies of 50Hz like  while the other papers had frequencies well over 100Hz. Also \ref{gait} does generate data not only walking a straight hallway but walking with distorted speed or walking in different directions with stops inbetween, while \ref{gaitauth}\ref{gaitauth2} left out data right after the start of a walk defining it as "not characteristic".
+\IEEEPARstart{T}{here} has been a lot of work on human gait recognition. There are two main approaches to identify a person or a persons gender via human gait recognition: First there is the "outer" approach where fixed sensors (mostly cameras) are used to gather the necessary information to compute the gait and thereby identify a person \cite{video}. These were called vision-based by Gafurov \cite{gaitauth2} Secondly there is the "inner" approach called sensor-based by Gafurov where sensors (mostly accelerometers and gyroscopes) are carried by the person which is to be identified.\\
+As we plan to identify persons using a smartphone app our approach would be a "sensor-based" gait recognition. There has been done work using more of the typical sensors of a modern day smartphone like GPS to differentiate between different modes of transport like walking or driving with a car \cite{transmode}.\\
+While there seems to be little to no work on groundtype recognition via gait differences there has been studies analysing the impact a backpack weighting 4kg does on the ability of a classifier trained on persons not carrying such \cite{gaitauth}. That particular paper \cite{gaitauth} also uses sensors placed in the persons pocket.
+Another paper by Gafurov \cite{gaitauth2} uses accelerometer data to identify a person by their gait but this time via an sensor strapped on the leg near the ankle. The use of a gyroscope is claimed to be first used in \cite{gait} using a wii-remote controll featuring similiar measurement frequencies of 50Hz like  while the other papers had frequencies well over 100Hz. Also \cite{gait} does generate data not only walking a straight hallway but walking with distorted speed or walking in different directions with stops inbetween, while \cite{gaitauth}\cite{gaitauth2} left out data right after the start of a walk defining it as "not characteristic".
+In  paper \cite{unobbiom} motion sensors are used in combination with voice recognition to authenticate users of smartphones or other mobile devices. The data was collected using 3D accelerometer data with a sensor in a hip pocket, a jacket pocket and a suitcase. The used learning algorithm was to store the training data and calculate a similarity score based on the difference in the forier transformation or the correlation between training and test data.
+Another approach on gait authentication can be seen in \cite{hidmark} they rely enteirely on acclerometer data collected with a phone in a poach attached to the side of the hip of the participants.
+The participants walked on a clearly defined path through a hallway so there was no random influence of the ground properties. The algorithm used for classification was a Hidden Markov Model.
+Another possible application for gait analysis is the medical evaluation of diseases that lead to a change in gait like a dropped foot \cite{dfoot}.
+There are also previous works on locating a device worn on the body by accelerometer data \cite{devloc} \cite{devlocw}. But in \cite{devloc} instead of locating the device on a walking subject, the motion during different everyday tasks was used for this purpose.
+\printbibliography
 \end{document}
