@@ -41,6 +41,10 @@ class Accelerometer(App): #our app
 
         def on_stop(self):
                 self.ui.save()
+
+        def on_pause(self):
+                self.ui.save()
+                return True
             
 if __name__ in ('__android__', '__main__'):
     Accelerometer().run()
