@@ -124,13 +124,14 @@
 
 % *** CITATION PACKAGES ***
 %
+
 \ifCLASSOPTIONcompsoc
   % IEEE Computer Society needs nocompress option
   % requires cite.sty v4.0 or later (November 2003)
-  % \usepackage[nocompress]{cite}
+  %\usepackage[nocompress]{cite}
 \else
   % normal IEEE
-  % \usepackage{cite}
+  %\usepackage{cite}
 \fi
 % cite.sty was written by Donald Arseneau
 % V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
@@ -607,6 +608,7 @@
 %       papers and their use requires extra complexity and work.
 % *** IF USING HYPERREF BE SURE AND CHANGE THE EXAMPLE PDF ***
 % *** TITLE/SUBJECT/AUTHOR/KEYWORDS INFO BELOW!!           ***
+\usepackage{hyperref}
 \newcommand\MYhyperrefoptions{bookmarks=true,bookmarksnumbered=true,
 pdfpagemode={UseOutlines},plainpages=false,pdfpagelabels=true,
 colorlinks=true,linkcolor={black},citecolor={black},pagecolor={black},
@@ -861,8 +863,8 @@ The abstract goes here.
 % and "HIS" in caps to complete the first word.
 \IEEEPARstart{T}{he} goal of our project is to gather various information from the gait of a person using the accelerometer and gyroscope of a normal Smartphone. Foremost the aim is to identify persons by their gait as well as their way of carrying the phone. The different ways of carrying the phone will be classified by the piece of clothing the phone is stored in like different trousers pockets and jacket pocket as it has been done before in various papers like [7]. Also we want to differentiate the mode of their gait to get information about wether a person is standing still, walking or running, as well as on a flat surface, uphil or downhill. There are papers like [8] already using not only flat surfaces but more interesting and usual settings like ways including stairs and corners in hallways. Therefore a focus of this project will be to gather information about the quality of the underground the person is walking on, deciding if it is hard ground (beton/asphalt) or soft ground (grass/dirt/mulch).
 
-To gather the necessary data we will use an app on a samsung S3 smartphone programmed in Python using Kivy http://kivy.org/\#home. The rate of measurement is about 40 measurements per Second. 
-The accelerometer used in the Samsung S3 is the LSM330DLC.
+To gather the necessary data we will use an app on a Samsung Galaxy S3 smartphone programmed in Python using the cross-platform python framework \href{http://www.kivy.org/#home}{Kivy}. The rate of measurement is about 40 measurements per Second. 
+The accelerometer used in the Samsung Galaxy S3 is the LSM330DLC.
 The data will consist of a list of timestamps and the according values for the accelerometer and gyroscope values in three dimensions.
 Since the smartphone can not provide a realtime environment for measurements the measured values will be slightly irregular.
 
@@ -902,6 +904,7 @@ The authors would like to thank...
 % The IEEEtran BibTeX style support page is at:
 % http://www.michaelshell.org/tex/ieeetran/bibtex/
 %\bibliographystyle{IEEEtran}
+%\bibliographystyle{ieeetr}
 % argument is your BibTeX string definitions and bibliography database(s)
 %\bibliography{IEEEabrv,../bib/paper}
 %
@@ -952,5 +955,24 @@ Another approach on gait authentication can be seen in \cite{hidmark} they rely 
 The participants walked on a clearly defined path through a hallway so there was no random influence of the ground properties. The algorithm used for classification was a Hidden Markov Model.
 Another possible application for gait analysis is the medical evaluation of diseases that lead to a change in gait like a dropped foot \cite{dfoot}.
 There are also previous works on locating a device worn on the body by accelerometer data \cite{devloc} \cite{devlocw}. But in \cite{devloc} instead of locating the device on a walking subject, the motion during different everyday tasks was used for this purpose.
+
+\section{Data - Gathering And Setup}
+\IEEEPARstart{T}{o} be able to use machine learning methods one has to gather some amount of data. For that we will use a Samsung S3 Smartphone and an application written on it in python via the cross-platform python framework \href{http://www.kivy.org/#home}{Kivy}. The application measures three dimensional gyroscope data as well as three dimensional accelerometer data and adds a timestamp.
+Our project has different aims of classification which we do not tempt to do all at once.
+\begin{itemize}
+	\item We aim to differentiate the type of ground as well as what kind of slope is existent.
+	For that we have to take data on natural and asphalt ground with each a downward an upward and no slope at all, resulting in 6 different classes.
+	\item One other aim is to differentiate if the phone is in the left or right trousers pocket or in the left or right jacket pocket, as well as if the zipper of the jacket is open or not. This yields another 6 classes.
+	\item We also aim to differentiate between persons carrying the device which will at least be us authors and ideally one or two tormentable friends. Resulting in another 2 to 4 classes
+\end{itemize}
+Overall to have $n$ samples of each class we have to take $6\times 6\times x\times n$ samples overall where $x$ is the number of testpersons (so far 2).
+As \cite{gaitauth2} differentiated persons using only three gait-cycles (omitting the first two as they where deemed degenerated due to the high noise factor of starting ones gait) we choose to take approximately 15m per sample. This way we can ensure to have about 10 samples per class.
+The distance walked by the group of testpersons will therefore be around 10 kilometers.
+While we will make sure the phone is orientated the same way in the trousers each time (screen facing the body and usb-port facing the ground) we decided to just toss the phone randomly into the jacket to simulate more typical phone usage behavior.
+To reduce correlation it makes sense to make some pauses between different data gatherings so that the testpersons not train themself to a certain type of gait while testing due to repetition. 
+Also if possible the testpersons will change shoes after about half the samples (efficiently resulting in another maybe determinable class which will however not be our aim to do).
+For the data gathering we will use the roads and paths around northern Göttingen as there is a variety of different slopes and groundtypes present to wander on. Presumably we will take some additional data on different slopes with a constant groundtype, as well as some additional data on the whereabouts of the phone on the garment on constant slope and groundtype.
+
+
 \printbibliography
 \end{document}
