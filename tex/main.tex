@@ -957,22 +957,19 @@ Another possible application for gait analysis is the medical evaluation of dise
 There are also previous works on locating a device worn on the body by accelerometer data \cite{devloc} \cite{devlocw}. But in \cite{devloc} instead of locating the device on a walking subject, the motion during different everyday tasks was used for this purpose.
 
 \section{Data - Gathering And Setup}
-\IEEEPARstart{T}{o} be able to use machine learning methods one has to gather some amount of data. For that we will use a Samsung S3 Smartphone and an application written on it in python via the cross-platform python framework \href{http://www.kivy.org/#home}{Kivy}. The application measures three dimensional gyroscope data as well as three dimensional accelerometer data and adds a timestamp.
-Our project has different aims of classification which we do not tempt to do all at once.
+\IEEEPARstart{T}{o} be able to use machine learning methods one has to gather some amount of data. For that we used a Samsung S3 Smartphone and an application written on it in python via the cross-platform python framework \href{http://www.kivy.org/#home}{Kivy}. The application measures three dimensional gyroscope data as well as three dimensional accelerometer data and adds a timestamp.
+Our project has different aims of classification which we did not tempt to do all at once.
 \begin{itemize}
 	\item We aim to differentiate the type of ground as well as what kind of slope is existent.
-	For that we have to take data on natural and asphalt ground with each a downward an upward and no slope at all, resulting in 6 different classes.
-	\item One other aim is to differentiate if the phone is in the left or right trousers pocket or in the left or right jacket pocket, as well as if the zipper of the jacket is open or not. This yields another 6 classes.
-	\item We also aim to differentiate between persons carrying the device which will at least be us authors and ideally one or two tormentable friends. Resulting in another 2 to 4 classes
+	For that we measured data on natural and asphalt ground with each a downward an upward as well as even ground. For this we have put the Samsung S3 Smartphone into the left trousers pocket with the screen facing the leg and the rest being orientated upside down.\\
+	The measuring for that took place at a slope in the experimental botanic garden of Göttingen of approximated length of 140 meters and slope of 10\%. As the path was asphalted ground we used the natural ground right next to the path to get natural ground slope samples with the same slope. \\
+	For the even natural ground we walked a line of about 50m in the front yard of the Institute for Computer-Science. For the even asphalted ground we decided to take the left-pocket data of the following classes.\\
+	To gather enough data we walked these a number of times (see section: Data - Data).
+	\item An other aim is to differentiate if the phone is in the left or right trousers pocket or in the left jacket pocket, as well as if the zipper of the jacket is open or not. For this we walked around the central campus of Göttingen resulting in 1.4 kilometer of walk per class on mostly even ground. 
+	\item We also aim to differentiate between persons carrying the device for which both authors did all the above exmeriments.
 \end{itemize}
-Overall to have $n$ samples of each class we have to take $6\times 6\times x\times n$ samples overall where $x$ is the number of testpersons (so far 2).
-As \cite{gaitauth2} differentiated persons using only three gait-cycles (omitting the first two as they where deemed degenerated due to the high noise factor of starting ones gait) we choose to take approximately 15m per sample. This way we can ensure to have about 10 samples per class.
-The distance walked by the group of testpersons will therefore be around 10 kilometers.
-While we will make sure the phone is orientated the same way in the trousers each time (screen facing the body and usb-port facing the ground) we decided to just toss the phone randomly into the jacket to simulate more typical phone usage behavior.
-To reduce correlation it makes sense to make some pauses between different data gatherings so that the testpersons not train themself to a certain type of gait while testing due to repetition. 
-Also if possible the testpersons will change shoes after about half the samples (efficiently resulting in another maybe determinable class which will however not be our aim to do).
-For the data gathering we will use the roads and paths around northern Göttingen as there is a variety of different slopes and groundtypes present to wander on. Presumably we will take some additional data on different slopes with a constant groundtype, as well as some additional data on the whereabouts of the phone on the garment on constant slope and groundtype.
-
+As \cite{gaitauth2} differentiated persons using only three gait-cycles (omitting the first two as they where deemed degenerated due to the high noise factor of starting ones gait) our amount of data should suffice to generate enough cycles to classify with reasonable precision. 
+\section{Data - Data and Plans for Feature Extraction}
 
 \printbibliography
 \end{document}
