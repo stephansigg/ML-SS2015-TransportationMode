@@ -147,18 +147,18 @@ print("done")
 
 
 #here starts testing of string similarity
-
-def k_median_eliminating_full(cycles,time,k=3):
-    #implement distance matrix so you dont have to compute often
+def make_D(cycles,time):
     D=np.zeros((len(cycles),len(cycles)))
-    print("start k_median: ")
+    print("start producing D: ")
     for i in range(len(cycles)):
         print("percentage: ",(((i+1)*1./len(cycles))**2)*100)
-	for j in range(len(cycles))[:i]:
+        for j in range(len(cycles))[:i]:
             D[j,i]=D[i,j]=similarity(cycles[i],cycles[j],time[i],time[j])
     D=D*1.
-    for i in range(len(cycles)):
-        D[i,i]=np.infty
+    return D
+
+def k_median_eliminating_full(cycles,D,k=3):
+    #implement distance matrix so you dont have to compute often
     clusters=range(len(cycles))
     nodes=range(len(cycles))
     while len(nodes)>3:
@@ -179,8 +179,14 @@ def k_median_eliminating_full(cycles,time,k=3):
             if clusters[j]==np.unique(clusters)[i]:
                 clusters[j]=i
     return clusters
-
-testing=k_median_eliminating_full(cycles_theo2[2][4],cycles_theo2[2][0])
+D=0
+try:
+     D=np.load('Distance_string.npy')
+except (IOError):
+     D=make_D(cycles_theo2[2][4],cycles_theo2[2][0])
+     np.save('Distance_string',D)
+#D=np.load('Distance_string.npy')
+testing=k_median_eliminating_full(cycles_theo2[2][4],D)
 print(testing)
 for i in range(len(testing)):
     if testing[i]==0:
