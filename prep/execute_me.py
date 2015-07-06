@@ -29,19 +29,19 @@ data_seb6=load.load_to_arrays("../data/tagged/sebastian/2015-05-30-14:45:30_accd
 print("seb 6/6")
 
 data_theo1=load.load_to_arrays("../data/tagged/theo/2015-05-25-12:45:24_accdata")
-print("theo 1/8")
+print("theo 1/7")
 data_theo2=load.load_to_arrays("../data/tagged/theo/2015-05-25-15:43:25_accdata")
-print("theo 2/8")
+print("theo 2/7")
 data_theo3=load.load_to_arrays("../data/tagged/theo/2015-05-30-14:12:55_accdata")
-print("theo 3/8")
+print("theo 3/7")
 data_theo4=load.load_to_arrays("../data/tagged/theo/2015-05-30-14:35:02_accdata")
-print("theo 4/8")
+print("theo 4/7")
 data_theo5=load.load_to_arrays("../data/tagged/theo/2015-05-30-14:39:03_accdata")
-print("theo 5/8")
+print("theo 5/7")
 data_theo6=load.load_to_arrays("../data/tagged/theo/2015-05-30-14:45:29_accdata")
-print("theo 6/8")
+print("theo 6/7")
 data_theo7=load.load_to_arrays("../data/tagged/theo/2015-05-30-14:48:01_accdata")
-print("theo 7/8")
+print("theo 7/7")
 data_theo8=load.load_to_arrays("../data/tagged/theo/2015-05-30-14:56:41_accdata")
 print("done")
 
@@ -151,7 +151,9 @@ print("done")
 def k_median_eliminating_full(cycles,time,k=3):
     #implement distance matrix so you dont have to compute often
     D=np.zeros((len(cycles),len(cycles)))
+    print("start k_median: ")
     for i in range(len(cycles)):
+        print("percentage: ",(((i+1)*1./len(cycles))**2)*100)
 	for j in range(len(cycles))[:i]:
             D[j,i]=D[i,j]=similarity(cycles[i],cycles[j],time[i],time[j])
     D=D*1.
@@ -162,24 +164,31 @@ def k_median_eliminating_full(cycles,time,k=3):
     while len(nodes)>3:
         index=np.argmin(D[nodes][:,nodes])
         index=(index//len(nodes),index%len(nodes))
-        nodes.remove(index[1])
-        nodes.remove(index[0])
-        clusters[clusters==index[1]]=index[0]
-        nodes.append(
-		np.where(clusters==index[0])
-			[np.argmin(np.mean(
-				D[np.where(clusters==index[0])][:,np.where(clusters==index[0])],axis=0)
-			)]
-		)
+        nodes.remove(nodes[index[1]])
+        nodes.remove(nodes[index[0]])
+        pre_nodes=[]
+        for i in range(len(clusters)):
+            if clusters[i]==index[0]:
+                pre_nodes.append(i)
+            if clusters[i]==index[1]:
+                clusters[i]==index[0]
+                pre_nodes.append(i)
+        nodes.append(pre_nodes[np.argmin(np.mean(D[pre_nodes][:,pre_nodes],axis=0))])
     for i in range(len(np.unique(clusters))):
-        clusters[clusters==np.unique(clusters)[i]]=i
+        for j in range(len(clusters)):
+            if clusters[j]==np.unique(clusters)[i]:
+                clusters[j]=i
     return clusters
 
 testing=k_median_eliminating_full(cycles_theo2[2][4],cycles_theo2[2][0])
-for i in np.where(testing==0):
-    plt.plot(cycles_theo2[2][0][i],cycles_theo2[2][4][i],"green")
-for i in np.where(testing==1):
-    plt.plot(cycles_theo2[2][0][i],cycles_theo2[2][4][i],"blue")
-for i in np.where(testing==2):
-    plt.plot(cycles_theo2[2][0][i],cycles_theo2[2][4][i],"red")
-
+print(testing)
+for i in range(len(testing)):
+    if testing[i]==0:
+        plt.plot(cycles_theo2[2][0][i],cycles_theo2[2][4][i],"green")
+for i in range(len(testing)):
+    if testing[i]==1:
+        plt.plot(cycles_theo2[2][0][i],cycles_theo2[2][4][i],"blue")
+for i in range(len(testing)):
+    if testing[i]==2:
+        plt.plot(cycles_theo2[2][0][i],cycles_theo2[2][4][i],"red")
+plt.show()
