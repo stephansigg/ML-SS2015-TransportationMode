@@ -9,6 +9,10 @@ def load_to_arrays(infile):
     tag=""
     pos=f.tell()
     nextline=f.readline()
+    while nextline[0:2]=="#T":
+    	pos=f.tell()
+    	tag=nextline[3:]
+    	nextline=f.readline()
     f.seek(pos)
     splitline=nextline.split(" ")
     stime=timedelta(hours=int(splitline[0]),minutes=int(splitline[1]),seconds=int(splitline[2]),microseconds=int(splitline[3]   ))
@@ -22,6 +26,10 @@ def load_to_arrays(infile):
             tag=line[3:]
             pos=f.tell()
             nextline=f.readline()
+            while nextline[0:2]=="#T":
+                pos=f.tell()
+                tag=nextline[3:]
+                nextline=f.readline()
             f.seek(pos)
             splitline=nextline.split(" ")
             stime=timedelta(hours=int(splitline[0]),minutes=int(splitline[1]),seconds=int(splitline[2]),microseconds=int(splitline[3]   ))
@@ -33,5 +41,7 @@ def load_to_arrays(infile):
             x.extend(list(map(float,splitline[4:])))
             l.append(x)
         line=f.readline()
+
+    arrays.append((tag,time,np.array(l)))
     return arrays
             
