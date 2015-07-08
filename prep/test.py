@@ -134,7 +134,7 @@ def proj_divergence(data1,data2,time1,time2):
 #
 #
 #
-def similarity(gait1,gait2,time1,time2,g=12):
+def similarity(gait1,gait2,time1,time2,g=12,pp=1):
     #we do not set g as gap penality but instead take the time gap as gap
     #and use g as multiplier for the time
     M=np.zeros((len(gait1),len(gait2)))
@@ -146,7 +146,7 @@ def similarity(gait1,gait2,time1,time2,g=12):
         M[0,j]=time2[j]*g
     #also we need some nice p (in this case just the norm)
     def p(x,y):
-        return np.abs(x-y)
+        return (np.abs(x-y))**pp
     for i in range(len(gait1))[1:]:
         for j in range(len(gait2))[1:]:
             M[i,j]=min(

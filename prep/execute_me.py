@@ -147,46 +147,95 @@ print("done")
 
 
 #here starts testing of string similarity
-def make_D(cycles,time):
+def make_D(cycles,time,G,P):
     D=np.zeros((len(cycles),len(cycles)))
     print("start producing D: ")
     for i in range(len(cycles)):
         print("percentage: ",(((i+1)*1./len(cycles))**2)*100)
         for j in range(len(cycles))[:i]:
-            D[j,i]=D[i,j]=similarity(cycles[i],cycles[j],time[i],time[j])
-    D=D*1.
+            D[j,i]=D[i,j]=similarity(cycles[i],cycles[j],time[i],time[j],g=G,pp=P)
+        D=D*1.
+        D[i,i]=np.infty
     return D
 
 def k_median_eliminating_full(cycles,D,k=3):
     #implement distance matrix so you dont have to compute often
-    clusters=range(len(cycles))
+    Dinf=D.copy()
+    Dzero=D.copy()
+    for i in range(len(cycles)):
+        Dinf[i,i]=np.infty
+        Dzero[i,i]=0
+    #just in case someone whants different things on the diagonal for use with np.mean or np. min/max
+    clusters=np.arange(len(cycles))
     nodes=range(len(cycles))
     while len(nodes)>3:
-        index=np.argmin(D[nodes][:,nodes])
+        dist=np.zeros((len(nodes),len(nodes)))
+        for i in range(len(nodes)):
+            for j in range(len(nodes)):
+                dist[i,j]=np.min(Dinf[np.where(clusters==clusters[nodes[i]])[0]][:,np.where(clusters==clusters[nodes[j]])[0]])
+            dist[i,i]=np.infty
+        index=np.argmin(dist)
         index=(index//len(nodes),index%len(nodes))
-        nodes.remove(nodes[index[1]])
-        nodes.remove(nodes[index[0]])
-        pre_nodes=[]
+        #so now index is (i,j) where D(i,j) is minimal under the condition that i and j are node-indices
+        #we must find the median for BOTH clusters
+        combination=np.where(np.logical_or(clusters==clusters[nodes[index[0]]],clusters==clusters[nodes[index[1]]]))[0]
+        new_node=combination[np.argmin(np.mean(Dzero[combination][:,combination],axis=0))]
+        to_remove=[nodes[index[0]],nodes[index[1]]]
+        print(to_remove)
+        nodes.remove(to_remove[0])
+        nodes.remove(to_remove[1])
+        nodes.append(new_node)
         for i in range(len(clusters)):
-            if clusters[i]==index[0]:
-                pre_nodes.append(i)
-            if clusters[i]==index[1]:
-                clusters[i]==index[0]
-                pre_nodes.append(i)
-        nodes.append(pre_nodes[np.argmin(np.mean(D[pre_nodes][:,pre_nodes],axis=0))])
-    for i in range(len(np.unique(clusters))):
-        for j in range(len(clusters)):
-            if clusters[j]==np.unique(clusters)[i]:
-                clusters[j]=i
+            clusters[i]=nodes[np.argmin(Dzero[nodes][:,i])]
+    nodes=np.sort(nodes)
+    for i in range(len(nodes)):
+        clusters[clusters==clusters[nodes[i]]]=i
     return clusters
+def k_median_eliminating_full_p(cycles,p=4,k=3):
+    #just in case someone whants different things on the diagonal for use with np.mean or np. min/max
+    Dzero=np.zeros((len(cycles),len(cycles)))
+    for i in range(len(cycles)):
+        for j in range(len(cycles)):
+            Dzero[i,j]=np.mean(np.abs(cycles[i]-cycles[j])**p)
+    Dinf=Dzero.copy()
+    print(Dzero)
+    for i in range(len(cycles)):
+        Dinf[i,i]=np.infty
+    clusters=np.arange(len(cycles))
+    nodes=range(len(cycles))
+    while len(nodes)>3:
+        dist=np.zeros((len(nodes),len(nodes)))
+        for i in range(len(nodes)):
+            for j in range(len(nodes)):
+                dist[i,j]=np.min(Dinf[np.where(clusters==clusters[nodes[i]])[0]][:,np.where(clusters==clusters[nodes[j]])[0]])
+            dist[i,i]=np.infty
+        index=np.argmin(dist)
+        index=(index//len(nodes),index%len(nodes))
+        #so now index is (i,j) where D(i,j) is minimal under the condition that i and j are node-indices
+        #we must find the median for BOTH clusters
+        combination=np.where(np.logical_or(clusters==clusters[nodes[index[0]]],clusters==clusters[nodes[index[1]]]))[0]
+        new_node=combination[np.argmin(np.mean(Dzero[combination][:,combination],axis=0))]
+        to_remove=[nodes[index[0]],nodes[index[1]]]
+        print(to_remove)
+        nodes.remove(to_remove[0])
+        nodes.remove(to_remove[1])
+        nodes.append(new_node)
+        for i in range(len(clusters)):
+            clusters[i]=nodes[np.argmin(Dzero[nodes][:,i])]
+    nodes=np.sort(nodes)
+    for i in range(len(nodes)):
+        clusters[clusters==clusters[nodes[i]]]=i
+    return clusters
+
+
 D=0
 try:
      D=np.load('Distance_string.npy')
 except (IOError):
-     D=make_D(cycles_theo2[2][4],cycles_theo2[2][0])
+     D=make_D(cycles_theo2[2][4],cycles_theo2[2][0],G=500,P=4)
      np.save('Distance_string',D)
 #D=np.load('Distance_string.npy')
-testing=k_median_eliminating_full(cycles_theo2[2][4],D)
+testing=k_median_eliminating_full_p(cycles_theo1[2][4])
 print(testing)
 for i in range(len(testing)):
     if testing[i]==0:
